@@ -16,20 +16,21 @@ var _mapping = {
   89:"Ethree", 90:"Fthree"
 };
 
-var _keys = []
+var _keys = [];
 
 var setKeys = function (noteNum) {
   _keys.push(_mapping[noteNum]);
 };
 
-var resetKeys = function () {
-  _keys = [];
+var removeKey = function (noteNum) {
+  var i = _keys.indexOf(_mapping[noteNum]);
+  _keys.splice(i,i);
 };
 
 const KeyStore = new Store(AppDispatcher);
 
-KeyStore.prototype.keyNames = function () {
-  return _keys.slice();
+KeyStore.prototype.freq = function () {
+  return _keys.slice()[0];
 }
 
 AppDispatcher.register(function(key) {
@@ -41,7 +42,7 @@ AppDispatcher.register(function(key) {
       break;
 
     case KeyConst.KEY_RELEASED:
-      resetKeys();
+      removeKey(key.noteNum);
       break;
 
 
