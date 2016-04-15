@@ -16,4 +16,6 @@
 !/log/.keep
 /tmp
 
+# Ignore overloaded react files
 node_modules
+/app/assets/javascripts/bundle*
