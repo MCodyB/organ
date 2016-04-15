@@ -4,17 +4,16 @@ var KeyActions = {
   keyPressed: function (key) {
     AppDispatcher.dispatch({
       actionType: KeyConst.KEY_PRESSED,
-      noteNum: key
+      noteName: key
     });
   },
 
   keyReleased: function (key) {
     AppDispatcher.dispatch({
       actionType: KeyConst.KEY_RELEASED,
-      noteNum: key
+      noteName: key
     });
-  },
-  
+  }
 };
 
 module.exports = KeyActions;
