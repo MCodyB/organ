@@ -1,4 +1,5 @@
-const KeyConst = require("../constants/key_constants")
+const KeyConst = require("../constants/key_constants");
+const AppDispatcher = require("../dispatcher/dispatcher");
 
 var KeyActions = {
   keyPressed: function (key) {

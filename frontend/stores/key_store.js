@@ -1,11 +1,11 @@
-const AppDispatcher = require("../dispatcher/dispatcher.js");
+const AppDispatcher = require("../dispatcher/dispatcher");
 const Store = require("flux/utils").Store;
 const Tones = require("../constants/tones");
 const KeyConst = require("../constants/key_constants")
 
 var _keys = [];
 
-var setKeys = function (noteNum) {
+var setKeys = function (noteName) {
   if (Tones[noteName]) {
     _keys.push(noteName);
     return true;
@@ -24,15 +24,14 @@ var removeKey = function (noteName) {
   }
 };
 
-const KeyStore = new Store(AppDispatcher);
+// const KeyStore = $.extend(new Store(AppDispatcher), {
+  const KeyStore = new Store(AppDispatcher);
 
-KeyStore.prototype.note = function () {
-  var k = _keys.slice();
-  return k[k.length - 1];
+  KeyStore.activeNotes = function () {
+  return _keys.slice();
 }
 
-AppDispatcher.register(function(key) {
-  var text;
+KeyStore.__onDispatch = function (key) {
 
   switch(key.actionType) {
     case KeyConst.KEY_PRESSED:
@@ -47,7 +46,26 @@ AppDispatcher.register(function(key) {
     default:
       // no op
   }
-});
+  
+}
+// })
+
+// AppDispatcher.register(function(key) {
+//
+//   switch(key.actionType) {
+//     case KeyConst.KEY_PRESSED:
+//       if (setKeys(key.noteName)) KeyStore.__emitChange();
+//       break;
+//
+//     case KeyConst.KEY_RELEASED:
+//       if (removeKey(key.noteName)) KeyStore.__emitChange();
+//       break;
+//
+//
+//     default:
+//       // no op
+//   }
+// });
 
 module.exports = KeyStore;
 

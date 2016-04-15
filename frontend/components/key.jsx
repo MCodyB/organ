@@ -8,10 +8,10 @@ const Key = React.createClass({
   },
 
   componentDidMount: function () {
-    this.note = new Note(this.prop.key);
-    if (this.state.keys.indexOf(this.prop.key) >= 0) {
-      var freq = Tones[this.prop.key];
-      this.note.start(freq);
+    if (this.state.keys.indexOf(this.props.keyName) >= 0) {
+      var freq = Tones[this.props.keyName];
+      this.note = new Note(freq);
+      this.note.start();
     }
   },
 
@@ -24,7 +24,8 @@ const Key = React.createClass({
   },
 
   render: function () {
-    return <div onChange={this.updateNotes}>{this.state.keyName}</div>;
+    console.log(this.props.keyName);
+    return <div onChange={this.updateNotes}>{this.props.keyName}</div>;
   },
   
 });

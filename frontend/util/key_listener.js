@@ -13,10 +13,12 @@ var Mapping = {
 };
 
 $(document).on("keydown", function (e) {
+  console.log(e.keyCode);
   KeyActions.keyPressed(Mapping[e.keyCode]);
 });
 
 $(document).on("keyup", function (e) {
+  console.log(e.keyCode);
   KeyActions.keyReleased(Mapping[e.keyCode]);
 });
 
